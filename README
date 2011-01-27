@@ -1,0 +1,12 @@
+1. pipe each received line to a command
+2. command splits up line into variables
+3. add variable data to rrdtool
+4. repeat
+
+
+idea: cat socat output to "read"
+
+
+
+Test it:
+$ php lines-to-stdout.php | ./work-with-lines.sh
