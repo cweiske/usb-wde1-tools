@@ -1,5 +1,8 @@
 #!/usr/bin/env php
 <?php
+/**
+ * Generates dummy data as a usb-wde1 would generate
+ */
 $arChannels = array(0, 1, 2, 3, 4, 7);
 
 $data = array(

@@ -1,0 +1,8 @@
+1. Keep a logfile with the most recent single line
+2. Use the munin plugin to generate munin-compatible data from the log file
+
+
+Short:
+ socat /dev/ttyUSB0,b9600 STDOUT |./munin/log-single-line.sh test.log
+or
+ ./dummy-data-generator.php |./munin/log-single-line.sh test.log
