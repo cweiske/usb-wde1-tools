@@ -111,5 +111,6 @@ fi
 
 for i in $sensors; do
     eval "value=\$$varprefix$i"
+    value=`echo $value|sed s/,/./`
     echo "sensor$i.value $value"
 done
