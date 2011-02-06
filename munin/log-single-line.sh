@@ -16,6 +16,9 @@ fi
 
 while read -r line
 do
-    timestamp=`date +%s`
-    echo $line|sed "s/\$1;1;;/\$1;1;$timestamp;/" > "$file"
+    beginning=`echo "$line"|cut -b 1-3`
+    if [ "$beginning" = '$1;' ]; then
+        timestamp=`date +%s`
+        echo $line|sed "s/\$1;1;;/\$1;1;$timestamp;/" > "$file"
+    fi
 done
