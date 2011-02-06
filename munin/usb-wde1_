@@ -99,6 +99,7 @@ read -r startzeichen zustand zeitstempel\
     < "$logfile"
 IFS=$OLDIFS
 
+#FIXME: check startzeichen
 #FIXME: check timestamp
 
 if [ "$TYPE" = "temperature" ]; then
