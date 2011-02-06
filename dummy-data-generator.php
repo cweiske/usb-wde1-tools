@@ -33,7 +33,7 @@ while (true) {
         $data['t' . $nChanNum] = str_replace('.', ',', rand(160, 260) / 10);
         $data['h' . $nChanNum] = rand(30, 80);
     }
-    echo '$' . implode(';', $data) . "\r\n";
+    echo '$' . implode(';', $data) . "\r\n\r\n";
     sleep(1);
 }
 
