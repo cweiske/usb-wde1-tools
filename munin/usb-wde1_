@@ -88,3 +88,27 @@ if [ "$1" = "config" ]; then
 
     exit 0
 fi
+
+#split by semicolons
+OLDIFS="$IFS"
+IFS=";"
+read -r startzeichen zustand zeitstempel\
+    t0 t1 t2 t3 t4 t5 t6 t7\
+    h0 h1 h2 h3 h4 h5 h6 h7\
+    tc hc ws ns rain checksum\
+    < "$logfile"
+IFS=$OLDIFS
+
+#FIXME: check timestamp
+
+if [ "$TYPE" = "temperature" ]; then
+    varprefix=t
+else
+    varprefix=h
+fi
+
+
+for i in $sensors; do
+    eval "value=\$$varprefix$i"
+    echo "sensor$i.value $value"
+done
