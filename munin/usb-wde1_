@@ -46,8 +46,20 @@ elif [ "$1" = "suggest" ]; then
     exit 0
 fi
 
-
+###############
 #load variables
+###############
+
+# Sensors to display
+if [ "$sensors" = "" ]; then
+    sensors="0 1 2 3 4 5 6 7"
+fi
+# Sensor names
+for i in $sensors; do
+    code="sensor$i=\${sensor$i:=Sensor $i}"
+    eval $code
+done
+# FIXME: Warning/critical values
 
 
 if [ "$1" = "config" ]; then
@@ -69,6 +81,10 @@ if [ "$1" = "config" ]; then
     echo 'graph_category sensors'
 
     #FIXME: warning/critical values
+    for i in $sensors; do
+        eval "name=\$sensor$i"
+        echo "sensor$i.label $name"
+    done
 
     exit 0
 fi
