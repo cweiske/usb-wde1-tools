@@ -68,12 +68,14 @@ if [ "$1" = "config" ]; then
     fi
     if [ "$TYPE" = "temperature" ]; then
         echo 'graph_title Temperature'
-        echo 'graph_args --base 1000 --lower-limit -30 --upper-limit 60'
+        #echo 'graph_args --base 1000 --lower-limit -30 --upper-limit 60'
+        echo 'graph_args --base 1000'
         echo 'graph_vlabel Temperature'
         echo 'graph_info Shows the temperature of different thermometers'
     else
         echo 'graph_title Humidity'
-        echo 'graph_args --base 1000 --lower-limit 0 --upper-limit 100'
+        #echo 'graph_args --base 1000 --lower-limit 0 --upper-limit 100'
+        echo 'graph_args --base 1000'
         echo 'graph_vlabel Humidity'
         echo 'graph_info Shows the air humidity of different thermometers (in %)'
     fi
