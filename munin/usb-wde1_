@@ -28,11 +28,15 @@ usb-wde1 -  Munin plugin to report usb-wde1 temperature and humidity data
 
 =cut
 
+TYPE=`basename $0 | sed 's/^.*_//g'`
+
 if [ "$1" = "autoconf" ]; then
-    if [ -r "$logfile" ]; then
-        echo yes
-    else
+    if [ ! -r "$logfile" ]; then
         echo "no (Logfile \"$logfile\" does not exist)"
+    elif [ "$TYPE" != "temperature" -a "$TYPE" != "humidity" ]; then
+        echo "no (Type \"$TYPE\" not supported, try \"./usb-wde1_ suggest\")"
+    else
+        echo yes
     fi
     exit 0
 
@@ -44,7 +48,6 @@ fi
 
 
 #load variables
-TYPE=`basename $0 | sed 's/^.*_//g'`
 
 
 if [ "$1" = "config" ]; then
