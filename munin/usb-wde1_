@@ -107,19 +107,23 @@ fi
 #split by semicolons
 OLDIFS="$IFS"
 IFS=";"
-read -r startzeichen zustand zeitstempel\
+read -r sign state timestamp\
     t0 t1 t2 t3 t4 t5 t6 t7\
     h0 h1 h2 h3 h4 h5 h6 h7\
     tc hc ws ns rain checksum\
     < "$logfile"
 IFS=$OLDIFS
 
-if [ "$startzeichen" != '$1' ]; then
+if [ "$sign" != '$1' ]; then
     echo Log line does not begin with \$1
     exit 2
 fi
 
-#FIXME: check timestamp
+curdate=`date +%s`
+if [ "$timestamp" -lt `expr $curdate - 600` ]; then
+    #timestamp is too old, data are too old
+    exit
+fi
 
 
 if [ "$TYPE" = "temperature" ]; then
