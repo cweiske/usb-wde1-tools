@@ -1,8 +1,55 @@
-1. Keep a logfile with the most recent single line
-2. Use the munin plugin to generate munin-compatible data from the log file
+USB-WDE1 Munin plugin
+=====================
+Generate graphs for temperature and humidity by utilizing Munin.
 
 
-Short:
- socat /dev/ttyUSB0,b9600 STDOUT |./munin/log-single-line.sh test.log
-or
- ./dummy-data-generator.php |./munin/log-single-line.sh test.log
+Idea
+----
+0. Keep a logfile with the most recent single line
+1. Use the munin plugin to generate munin-compatible data from the log file
+
+
+Setup
+-----
+0. Checkout the munin plugin code:
+   $ cd /usr/local/src
+   $ git clone ssh://git.cweiske.de/~/git/usb-wde1-tools.git
+   $ cd usb-wde1-tools
+
+1. A process needs to watch the USB interface and log the last
+   line with temperature data into a log file.
+   You can do that manually with
+   $ socat /dev/ttyUSB0,b9600 STDOUT |./munin/log-single-line.sh test.log
+   or
+   $ ./dummy-data-generator.php |./munin/log-single-line.sh test.log
+
+   The most easy way is to run
+   $ cd munin && nohup ./usb-wde1-log-last.sh &
+   once. It backgrounds the logging process and logs into /tmp/usb-wde1-last.
+   This process needs to be started whenever the machine is rebooted.
+
+2. Link the munin plugin:
+   $ cd /etc/munin/plugins
+   $ ln -s /usr/local/src/usb-wde1-tools/munin/usb-wde1_ usb-wde1_temperature
+   $ ln -s /usr/local/src/usb-wde1-tools/munin/usb-wde1_ usb-wde1_humidity
+
+3. Configure the plugins
+   Edit /etc/munin/plugin-conf.d/munin-node and add the following lines:
+   [usb-wde1_*]
+   env.logfile /tmp/usb-wde1-last
+   env.host_name House
+   env.sensors 0 1 7
+   env.sensor0 Living room
+   env.sensor1 Kitchen
+   env.sensor7 Outside
+
+4. Try it:
+   $ munin-run usb-wde1_temperature autoconf
+    - should echo "yes"
+   $ munin-run usb-wde1_temperature config
+    - should display the plugin configuration with all environment variables
+      set
+   $ munin-run usb-wde1_temperature
+    - should display the current values from the log file
+
+5. You are done - enjoy.
