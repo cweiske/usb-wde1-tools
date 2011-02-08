@@ -50,6 +50,7 @@ Setup
     - should display the plugin configuration with all environment variables
       set
    $ munin-run usb-wde1_temperature
+   $ munin-run usb-wde1_humidity
     - should display the current values from the log file
 
 5. You are done - enjoy.
