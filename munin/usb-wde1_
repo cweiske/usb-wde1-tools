@@ -26,6 +26,11 @@ usb-wde1 -  Munin plugin to report usb-wde1 temperature and humidity data
  #%# family=manual
  #%# capabilities=autoconf suggest
 
+=head1 AUTHOR and LICENSE
+
+License: http://www.gnu.org/licenses/agpl.html AGPL
+Author: Christian Weiske <cweiske@cweiske.de>
+
 =cut
 
 TYPE=`basename $0 | sed 's/^.*_//g'`
@@ -90,6 +95,13 @@ if [ "$1" = "config" ]; then
 
     exit 0
 fi
+
+#Beispielausgabe USB-WDE1:
+# $1;1;;13,8;22,7;22,6;17,8;22,2;21,2;22,9;;59;35;38;49;38;40;35;;;;;;;0
+# Doku des Formats in 92030_USB_WDE1_V1.0_UM.pdf bei elv.de verfügbar
+# Format ist "Logview openformat"
+# http://www.logview.info/cms/d_formatbeschreibung.phtml
+
 
 #split by semicolons
 OLDIFS="$IFS"
