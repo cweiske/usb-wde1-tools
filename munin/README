@@ -20,8 +20,6 @@ Setup
    line with temperature data into a log file.
    You can do that manually with
    $ socat /dev/ttyUSB0,b9600 STDOUT |./munin/log-single-line.sh test.log
-   or
-   $ ./dummy-data-generator.php |./munin/log-single-line.sh test.log
 
    The most easy way is to run
    $ cd munin && nohup ./usb-wde1-log-last.sh &
@@ -54,3 +52,23 @@ Setup
     - should display the current values from the log file
 
 5. You are done - enjoy.
+
+
+
+Debugging & Development
+-----------------------
+The dummy data generator is a small php script that generates log lines
+as they would come from the usb-wde1 usb port:
+$ ./dummy-data-generator.php |./munin/log-single-line.sh test.log
+
+Local (non-installed) plugin setup:
+$ cd munin
+$ ln -s usb-wde1_ usb-wde1_temperature
+$ ln -s usb-wde1_ usb-wde1_humidity
+$ cd ..
+
+
+Running the munin plugin is also relatively easy, and you can easily pass
+the environment configuration variables from the munin configuration
+on the cli:
+$ logfile=test.log sensors="0 1 7" ./munin/usb-wde1_temperature
