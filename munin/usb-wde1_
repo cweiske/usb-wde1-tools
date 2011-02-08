@@ -114,8 +114,13 @@ read -r startzeichen zustand zeitstempel\
     < "$logfile"
 IFS=$OLDIFS
 
-#FIXME: check startzeichen
+if [ "$startzeichen" != '$1' ]; then
+    echo Log line does not begin with \$1
+    exit 2
+fi
+
 #FIXME: check timestamp
+
 
 if [ "$TYPE" = "temperature" ]; then
     varprefix=t
