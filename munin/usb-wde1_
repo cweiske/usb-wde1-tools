@@ -27,10 +27,14 @@ usb-wde1 -  Munin plugin to report usb-wde1 temperature and humidity data
  #%# family=manual
  #%# capabilities=autoconf suggest
 
-=head1 AUTHOR and LICENSE
+=head1 AUTHOR
 
-License: http://www.gnu.org/licenses/agpl.html AGPL
-Author: Christian Weiske <cweiske@cweiske.de>
+Christian Weiske <cweiske@cweiske.de>
+
+=head1 LICENSE
+
+AGPL
+http://www.gnu.org/licenses/agpl.html
 
 =cut
 
