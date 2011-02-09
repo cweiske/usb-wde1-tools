@@ -46,7 +46,7 @@ http://www.gnu.org/licenses/agpl.html
 
 =cut
 
-. "$MUNIN_LIBDIR/plugins/plugin.sh"
+. ${MUNIN_LIBDIR:=/usr/share/munin}/plugins/plugin.sh
 
 TYPE=`basename $0 | sed 's/^.*_//g'`
 
