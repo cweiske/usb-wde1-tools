@@ -22,10 +22,13 @@ usb-wde1 -  Munin plugin to report usb-wde1 temperature and humidity data
   env.sensor1 Kitchen
   env.sensor7 Outside
 
-=head1 MAGIC MARKERS
+ Warning/critical values for all sensors:
+  env.warning 10
+  env.critical 5
 
- #%# family=manual
- #%# capabilities=autoconf suggest
+ Warning/critical values for single sensors:
+  env.sensor7_warning 40
+  env.sensor7_critical 50
 
 =head1 AUTHOR
 
@@ -36,7 +39,14 @@ Christian Weiske <cweiske@cweiske.de>
 AGPL
 http://www.gnu.org/licenses/agpl.html
 
+=head1 MAGIC MARKERS
+
+ #%# family=manual
+ #%# capabilities=autoconf suggest
+
 =cut
+
+. "$MUNIN_LIBDIR/plugins/plugin.sh"
 
 TYPE=`basename $0 | sed 's/^.*_//g'`
 
@@ -69,7 +79,6 @@ for i in $sensors; do
     code="sensor$i=\${sensor$i:=Sensor $i}"
     eval $code
 done
-# FIXME: Warning/critical values
 
 
 if [ "$1" = "config" ]; then
@@ -92,10 +101,11 @@ if [ "$1" = "config" ]; then
     echo 'graph_scale no'
     echo 'graph_category sensors'
 
-    #FIXME: warning/critical values
     for i in $sensors; do
         eval "name=\$sensor$i"
         echo "sensor$i.label $name"
+        print_warning "sensor$i"
+        print_critical "sensor$i"
     done
 
     exit 0
