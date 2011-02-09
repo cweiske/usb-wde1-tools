@@ -13,7 +13,7 @@ Setup
 -----
 0. Checkout the munin plugin code:
    $ cd /usr/local/src
-   $ git clone ssh://git.cweiske.de/~/git/usb-wde1-tools.git
+   $ git clone git://git.cweiske.de/usb-wde1-tools.git
    $ cd usb-wde1-tools
 
 1. A process needs to watch the USB interface and log the last
@@ -71,4 +71,4 @@ $ cd ..
 Running the munin plugin for development purposes is also relatively easy
 since you can pass the environment configuration variables
 from the munin configuration on the command line:
-$ MUNIN_LIBDIR=/usr/share/munin/ logfile=test.log sensors="0 1 7" ./munin/usb-wde1_temperature
+$ logfile=test.log sensors="0 1 7" ./munin/usb-wde1_temperature
