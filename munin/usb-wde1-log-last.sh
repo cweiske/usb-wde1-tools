@@ -21,6 +21,12 @@ else
         exit 1
     fi
 
-    socat /dev/ttyUSB0,b9600 STDOUT\
+    #socat breaks something that leads to
+    # WRONG VAL, WRONG CMD and FullBuff->Reset
+    # errors
+    #socat /dev/ttyUSB0,b9600 STDOUT\
+
+    # quit cu with "~."
+    cu -l /dev/ttyUSB0 -s 9600\
      | $curdir/log-single-line.sh /tmp/usb-wde1-last
 fi
