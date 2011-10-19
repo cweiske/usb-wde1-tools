@@ -72,3 +72,14 @@ Running the munin plugin for development purposes is also relatively easy
 since you can pass the environment configuration variables
 from the munin configuration on the command line:
 $ logfile=test.log sensors="0 1 7" ./munin/usb-wde1_temperature
+
+
+Permission errors
+.................
+
+    cu: open (/dev/ttyUSB0): Permission denied
+    cu: /dev/ttyUSB0: Line in use
+
+Only way that I found to fix this was change ownership of `/dev/ttyUSB0` to uucp::
+
+     $ chown uucp /dev/ttyUSB0
