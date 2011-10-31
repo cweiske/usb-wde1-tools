@@ -12,7 +12,7 @@ plain_line($data[6]);
 plain_line($data[0]);
 plain_line($data[4]);
 echo "\n";
-echo date('c') . "\n";
+echo '              ' . date('c') . "\n";
 
 
 function plain_line($datum) {
