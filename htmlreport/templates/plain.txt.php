@@ -1,3 +1,4 @@
+<?php echo pack("CCC", 0xef, 0xbb, 0xbf); ?>
 Zimmer             Temperatur   Luftfeuchte
 -------------------------------------------
 <?php
