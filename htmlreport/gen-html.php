@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 $cfgfile = __DIR__ . '/config.php';
 if (!file_exists($cfgfile)) {
