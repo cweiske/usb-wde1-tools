@@ -1,0 +1,22 @@
+<?php
+/**
+ * path to the .rrd files.
+ * {item} will be replaced with humidity/temperature,
+ * {id} with the sensor number
+ */
+$filetemplate = '/var/lib/munin/home.cweiske.de/haus-usb_wde1_{item}-sensor{id}-g.rrd';
+$outdir = '/tmp/';
+
+/**
+ * Array of sensor number to sensor title associations
+ */
+$names = array(
+    0 => 'Schlafzimmer',
+    1 => 'Wohnzimmer',
+    2 => 'Buero',
+    3 => 'Aussen',
+    4 => 'Bad',
+    5 => 'Kinderzimmer',
+    6 => 'Kueche',
+);
+?>
