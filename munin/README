@@ -73,6 +73,11 @@ since you can pass the environment configuration variables
 from the munin configuration on the command line:
 $ logfile=test.log sensors="0 1 7" ./munin/usb-wde1_temperature
 
+When you have problems running the munin plugin, try to
+remove the line 
+ env.host_name House
+from file usb-wde1_
+
 
 Permission errors
 .................
