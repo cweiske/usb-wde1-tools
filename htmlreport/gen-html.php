@@ -7,6 +7,11 @@ if (!file_exists($cfgfile)) {
 }
 require $cfgfile;
 
+if (!function_exists('rrd_lastupdate')) {
+    echo "rrd PHP extension is missing\n";
+    exit(2);
+}
+
 $data = array();
 foreach ($names as $id => $name) {
     $data[$id]['name'] = $name;
