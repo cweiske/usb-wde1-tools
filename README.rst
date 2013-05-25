@@ -1,16 +1,17 @@
+*********************
 USB-WDE1 Munin plugin
-=====================
+*********************
 Generate graphs for temperature and humidity by utilizing Munin.
 
 
 Idea
-----
+====
 0. Keep a logfile with the most recent single line
 1. Use the munin plugin to generate munin-compatible data from the log file
 
 
 Setup
------
+=====
 0. Checkout the munin plugin code:
    $ cd /usr/local/src
    $ git clone git://git.cweiske.de/usb-wde1-tools.git
@@ -56,7 +57,7 @@ Setup
 
 
 Debugging & Development
------------------------
+=======================
 The dummy data generator is a small php script that generates log lines
 as they would come from the usb-wde1 usb port:
 $ ./dummy-data-generator.php |./munin/log-single-line.sh test.log
@@ -80,7 +81,7 @@ from file usb-wde1_
 
 
 Permission errors
-.................
+-----------------
 
     cu: open (/dev/ttyUSB0): Permission denied
     cu: /dev/ttyUSB0: Line in use
@@ -88,3 +89,14 @@ Permission errors
 Only way that I found to fix this was change ownership of `/dev/ttyUSB0` to uucp::
 
      $ chown uucp /dev/ttyUSB0
+
+
+HTML/Plain text output
+======================
+You may use ``htmlreport/gen-html.php`` to generate HTML or plain text
+files with the temperature and humidity information.
+
+Install PHP and the PHP rrd extension (``pear install pecl/rrd``) to make it
+work.
+
+Run ``gen-html.php`` every 5 minutes.
