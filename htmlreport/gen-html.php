@@ -12,6 +12,13 @@ if (!function_exists('rrd_lastupdate')) {
     exit(2);
 }
 
+if (!is_array($filetemplate)) {
+    $filetemplate = array_combine(
+        array_keys($names),
+	array_fill(0, count($names), $filetemplate)
+    );
+}
+
 $data = array();
 foreach ($names as $id => $name) {
     $data[$id]['name'] = $name;
@@ -20,7 +27,7 @@ foreach ($names as $id => $name) {
             str_replace(
                 array('{item}', '{id}'),
                 array($item, $id),
-                $filetemplate
+                $filetemplate[$id]
             )
         );
         if ($lu === false) {
