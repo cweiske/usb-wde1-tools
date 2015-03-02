@@ -82,7 +82,7 @@ done
 
 
 if [ "$1" = "config" ]; then
-    if [ "$host_name" != "" ]; then
+    if [ "x$host_name" != "x" ]; then
         echo "host_name $host_name"
     fi
     if [ "$TYPE" = "temperature" ]; then
