@@ -28,8 +28,10 @@ Setup
 
      $ cd munin && nohup ./usb-wde1-log-last.sh &
 
-   once. It backgrounds the logging process and logs into /tmp/usb-wde1-last.
+   once. It backgrounds the logging process and logs into ``/tmp/usb-wde1-last``.
    This process needs to be started whenever the machine is rebooted.
+
+   You can run ``make`` to install the init script.
 
 2. Link the munin plugin::
 
