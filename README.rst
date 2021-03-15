@@ -28,7 +28,7 @@ Setup
 
      $ cd munin && nohup ./usb-wde1-log-last.sh &
 
-   once. It backgrounds the logging process and logs into ``/tmp/usb-wde1-last``.
+   once. It backgrounds the logging process and logs into ``/var/spool/usb-wde1/usb-wde1-last``.
    This process needs to be started whenever the machine is rebooted.
 
    You can run ``make`` to install the init script.
@@ -43,7 +43,7 @@ Setup
    Edit /etc/munin/plugin-conf.d/munin-node and add the following lines::
 
      [usb-wde1_*]
-     env.logfile /tmp/usb-wde1-last
+     env.logfile /var/spool/usb-wde1/usb-wde1-last
      env.host_name House
      env.sensors 0 1 7
      env.sensor0 Living room

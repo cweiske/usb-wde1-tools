@@ -15,7 +15,7 @@ usb-wde1 -  Munin plugin to report usb-wde1 temperature and humidity data
 =head2 EXAMPLE CONFIGURATION
 
  [usb-wde1_*]
-  env.logfile /tmp/usb-wde1-last
+  env.logfile /var/spool/usb-wde1/usb-wde1-last
   env.host_name House
   env.sensors 0 1 7
   env.sensor0 Living room

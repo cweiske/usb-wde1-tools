@@ -13,10 +13,14 @@
 
 device=/dev/ttyUSB0
 
+if [ ! -d /var/spool/usb-wde1 ]; then
+    mkdir /var/spool/usb-wde1
+fi
+
 curdir="$(dirname "$0")"
 if [ "$1" = "--dummy-data" ]; then
     $curdir/../dummy-data-generator.php\
-     | $curdir/log-single-line.sh /tmp/usb-wde1-last
+     | $curdir/log-single-line.sh /var/spool/usb-wde1/usb-wde1-last
 else
     if [ ! -r $device ]; then
         echo "Device $device is not readable"
@@ -27,5 +31,5 @@ else
     # WRONG VAL, WRONG CMD and FullBuff->Reset
     # errors
     socat $device,b9600,min=1,time=1,brkint=0,icrnl=0,ixoff=1,imaxbel=0,opost=0,isig=0,icanon=0,iexten=0,echo=0,echoe=0,echok=0 STDOUT\
-     | $curdir/log-single-line.sh /tmp/usb-wde1-last
+     | $curdir/log-single-line.sh /var/spool/usb-wde1/usb-wde1-last
 fi
