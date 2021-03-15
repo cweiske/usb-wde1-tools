@@ -3,6 +3,8 @@
  * path to the .rrd files.
  * {item} will be replaced with humidity/temperature,
  * {id} with the sensor number
+ *
+ * May be an array with the same keys as in $names.
  */
 $filetemplate = '/var/lib/munin/home.cweiske.de/haus-usb_wde1_{item}-sensor{id}-g.rrd';
 $outdir = '/tmp/';
