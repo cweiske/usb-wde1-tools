@@ -31,7 +31,13 @@ Setup
    once. It backgrounds the logging process and logs into ``/var/spool/usb-wde1/usb-wde1-last``.
    This process needs to be started whenever the machine is rebooted.
 
-   You can run ``make`` to install the init script.
+   The ``systemd/`` directory contains a ``usb-wde1-log.service`` file you can copy to
+   ``/etc/systemd/system/``. After copying it, run::
+
+     $ systemctl daemon-reload
+     $ systemctl start usb-wde1-log
+     $ systemctl status usb-wde1-log
+     $ systemctl enable usb-wde1-log
 
 2. Link the munin plugin::
 
@@ -39,8 +45,9 @@ Setup
    $ ln -s /usr/local/src/usb-wde1-tools/munin/usb-wde1_ usb-wde1_temperature
    $ ln -s /usr/local/src/usb-wde1-tools/munin/usb-wde1_ usb-wde1_humidity
 
-3. Configure the plugins
-   Edit /etc/munin/plugin-conf.d/munin-node and add the following lines::
+3. Configure the plugins:
+
+   Edit ``/etc/munin/plugin-conf.d/munin-node`` and add the following lines::
 
      [usb-wde1_*]
      env.logfile /var/spool/usb-wde1/usb-wde1-last

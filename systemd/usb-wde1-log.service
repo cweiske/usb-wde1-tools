@@ -1,0 +1,15 @@
+[Unit]
+Description=USB-WDE1-Wetterdatenlogger
+After=systemd-udev-settle.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/usr/local/src/usb-wde1-tools/munin/
+ExecStart=/usr/local/src/usb-wde1-tools/munin/usb-wde1-log-last.sh
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
