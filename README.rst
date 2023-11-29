@@ -128,3 +128,32 @@ Install PHP and the PHP rrd extension (``pear install pecl/rrd``) to make it
 work.
 
 Run ``gen-html.php`` every 5 minutes.
+
+
+Static USB device name
+======================
+When you have multiple serial USB devices attached to the computer,
+rebooting may lead to switched ttyUSB* numbers.
+
+A solution is to define a udev rule in ``/etc/udev/rules.d/99-usb-wde1.rules``::
+
+  SUBSYSTEM=="tty", ATTRS{serial}=="XQJ2EJEMADDFYBD3", SYMLINK+="usbwde1"
+
+You can find the serial number in ``dmesg`` output::
+
+  usb 1-3: new full-speed USB device number 2 using xhci_hcd
+  usb 1-3: New USB device found, idVendor=10c4, idProduct=ea60, bcdDevice= 1.00
+  usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 1-3: Product: ELV USB-WDE1 Wetterdatenempfänger
+  usb 1-3: Manufacturer: Silicon Labs
+  usb 1-3: SerialNumber: XQJ2EJEMADDFYBD3
+
+After creating the file, activate it::
+
+  $ udevadm control --reload
+  $ udevadm trigger
+
+Now a file ``/dev/usbwde1`` exists.
+
+Modify ``munin/usb-wde1-log-last.sh`` to use the new device file instead
+of ``ttyUSB0``.
